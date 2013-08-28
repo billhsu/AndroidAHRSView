@@ -1,4 +1,4 @@
-Android_AHRSView
+AndroidAHRSView
 ================
 
 AHRSView control for Android.  
