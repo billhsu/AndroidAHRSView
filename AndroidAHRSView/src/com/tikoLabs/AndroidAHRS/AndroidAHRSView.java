@@ -17,7 +17,7 @@
  *
  */
 
-package com.tikoLabs.AndroidAHRSView;
+package com.tikoLabs.AndroidAHRS;
 
 import android.content.Context;
 import android.graphics.Canvas;
