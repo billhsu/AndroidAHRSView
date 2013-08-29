@@ -24,16 +24,17 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ahrsView = (AndroidAHRSView)findViewById(R.id.AHRSView);
         
         Thread t = new Thread() {
             public void run(){
                 while(true){
-                    sum += 0.1f;
-                    pitch = sum-((int)sum/180)*180.0f;
-                    roll = sum-((int)sum/180)*180.0f;
+                    sum += 1.0f;
+                    pitch = sum - ((int)sum/180)*180.0f;
+                    roll = sum - ((int)sum/180)*180.0f;
                     mHandler.post(mUpdateAHRS);
                     try{
-                        sleep(100);
+                        sleep(10);
                     }
                     catch (Exception e)
                     {
