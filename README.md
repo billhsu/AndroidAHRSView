@@ -8,8 +8,9 @@ A control for visualization of the Attitude Heading Reference System information
 
 ## How to use it
 
-* Link the AndroidAHRSView library to your Android project.  
- Add to layout xml.
+* **Link the AndroidAHRSView library to your Android project.**  
+
+Add to layout xml.
 
 ```xml
 <com.tikoLabs.AndroidAHRS.AndroidAHRSView
@@ -18,27 +19,25 @@ A control for visualization of the Attitude Heading Reference System information
         android:layout_height="250dp" />
 ```
 
-* Import the AndroidAHRSView package to your java file.
+* **Import the AndroidAHRSView package to your java file.**
 
 ```java
 import com.tikoLabs.AndroidAHRS.AndroidAHRSView;
 ```
 
-* Use it in your code!  
-Define object  
+* **Use it in your code!  **
 
+Define object  
 ```java
 private AndroidAHRSView ahrsView = null;
 ```
 
 Find the object in xml  
-
 ```java
 ahrsView = (AndroidAHRSView)findViewById(R.id.AHRSView);
 ```
 
 Set values  
-
 ```java
 ahrsView.setRoll(roll);
 ahrsView.setPitch(pitch);
