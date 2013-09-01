@@ -10,7 +10,7 @@ A control for visualization of the Attitude Heading Reference System information
 
 * **Link the AndroidAHRSView library to your Android project.**  
 
-* **Add to layout xml.**
+* **Add to the layout xml.**
 
 ```xml
 <com.tikoLabs.AndroidAHRS.AndroidAHRSView
@@ -44,3 +44,10 @@ ahrsView.setPitch(pitch);
 ```
 
 For more details please check the [AHRSExample](https://github.com/billhsu/AndroidAHRSView/blob/master/AHRSExample/) project.  
+
+##Author
+**Shipeng Xu**
+
++ http://BillHsu.me
++ http://twitter.com/1991bill
++ http://weibo.com/billhsu
