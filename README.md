@@ -10,7 +10,7 @@ A control for visualization of the Attitude Heading Reference System information
 
 * **Link the AndroidAHRSView library to your Android project.**  
 
-Add to layout xml.
+* **Add to layout xml.**
 
 ```xml
 <com.tikoLabs.AndroidAHRS.AndroidAHRSView
