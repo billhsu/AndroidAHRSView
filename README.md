@@ -25,7 +25,7 @@ Add to layout xml.
 import com.tikoLabs.AndroidAHRS.AndroidAHRSView;
 ```
 
-* **Use it in your code!  **
+* **Use it in your code!**
 
 Define object  
 ```java
