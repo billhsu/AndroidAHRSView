@@ -2,6 +2,10 @@ AndroidAHRSView
 ================
 
 Attitude Heading Reference System(AHRS) display module for Android.
+
+<img src="doc/androidAHRS.png" alt="screenshot" width="200" height="200"/>
+
+## Demo gif
 ![gif](doc/demo.gif)
 
 ## How to use it
