@@ -26,6 +26,7 @@ public class AHRSView extends View {
     private Paint skyPaint;
     private Paint textPaint;
     private WeakReference<Bitmap> ahrsBitmapRef = new WeakReference<>(null);
+    private WeakReference<Bitmap> ahrsFlippedBitmapRef = new WeakReference<>(null);
 
     private int width;
     private int height;
@@ -50,11 +51,7 @@ public class AHRSView extends View {
         float centerX = width / 2;
         float centerY = height / 2;
         float horizontalWidth = width * 0.05f;
-        Bitmap ahrsBitmap = ahrsBitmapRef.get();
-        if (ahrsBitmap == null) {
-            ahrsBitmap = drawAHRSBitmap();
-            ahrsBitmapRef = new WeakReference<>(ahrsBitmap);
-        }
+        Bitmap ahrsBitmap = getAHRSBitmap();
         canvas.save();
         canvas.rotate(roll, centerX, centerY);
         float pitch180 = (pitch % 360.0f) - 180.0f;
@@ -85,11 +82,7 @@ public class AHRSView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         width = w;
         height = h;
-        Bitmap ahrsBitmap = ahrsBitmapRef.get();
-        if (ahrsBitmap != null) {
-            ahrsBitmap.recycle();
-        }
-        ahrsBitmapRef = new WeakReference<>(drawAHRSBitmap());
+        updateAHRSBitmap();
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
@@ -108,7 +101,39 @@ public class AHRSView extends View {
         invalidate();
     }
 
-    private Bitmap drawAHRSBitmap() {
+    private void updateAHRSBitmap() {
+        Bitmap ahrsBitmap = ahrsBitmapRef.get();
+        if (ahrsBitmap != null) {
+            ahrsBitmap.recycle();
+        }
+        ahrsBitmapRef = new WeakReference<>(drawAHRSBitmap(false));
+
+        Bitmap ahrsFlippedBitmap = ahrsFlippedBitmapRef.get();
+        if (ahrsFlippedBitmap != null) {
+            ahrsFlippedBitmap.recycle();
+        }
+        ahrsFlippedBitmapRef = new WeakReference<>(drawAHRSBitmap(true));
+    }
+
+    private Bitmap getAHRSBitmap() {
+        if (Math.abs(roll % 360 - 180) <= 90) {
+            Bitmap ahrsFlippedBitmap = ahrsFlippedBitmapRef.get();
+            if (ahrsFlippedBitmap == null) {
+                ahrsFlippedBitmap = drawAHRSBitmap(true);
+                ahrsFlippedBitmapRef = new WeakReference<>(ahrsFlippedBitmap);
+            }
+            return ahrsFlippedBitmap;
+        } else {
+            Bitmap ahrsBitmap = ahrsBitmapRef.get();
+            if (ahrsBitmap == null) {
+                ahrsBitmap = drawAHRSBitmap(false);
+                ahrsBitmapRef = new WeakReference<>(ahrsBitmap);
+            }
+            return ahrsBitmap;
+        }
+    }
+
+    private Bitmap drawAHRSBitmap(boolean flipped) {
         int size = Math.max(width, height) * 2;
         Bitmap bitmap = Bitmap.createBitmap(size, size * 2, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
@@ -123,37 +148,51 @@ public class AHRSView extends View {
         for (int i = -1; i >= -17; --i) {
             float length = Math.abs(i) % 2 == 1 ? shortLineLength : longLineLength;
             int yIndex = -i;
-            drawAHRSLine(canvas, length, yIndex * pitchInterval, Integer.toString(i * 10));
+            drawAHRSLine(canvas, length, yIndex * pitchInterval, Integer.toString(i * 10), flipped);
         }
         canvas.drawLine(0, pitchInterval * 18, size, pitchInterval * 18, ahrsLine);
 
         for (int i = 17; i >= 1; --i) {
             float length = Math.abs(i) % 2 == 1 ? shortLineLength : longLineLength;
             int yIndex = 36 - i;
-            drawAHRSLine(canvas, length, yIndex * pitchInterval, Integer.toString(i * 10));
+            drawAHRSLine(canvas, length, yIndex * pitchInterval, Integer.toString(i * 10), flipped);
         }
         canvas.drawLine(0, pitchInterval * 36, size, pitchInterval * 36, ahrsLine);
 
         for (int i = -1; i >= -17; --i) {
             float length = Math.abs(i) % 2 == 1 ? shortLineLength : longLineLength;
             int yIndex = 36 - i;
-            drawAHRSLine(canvas, length, yIndex * pitchInterval, Integer.toString(i * 10));
+            drawAHRSLine(canvas, length, yIndex * pitchInterval, Integer.toString(i * 10), flipped);
         }
         canvas.drawLine(0, pitchInterval * 54, size, pitchInterval * 54, ahrsLine);
 
         for (int i = 17; i >= 1; --i) {
             float length = Math.abs(i) % 2 == 1 ? shortLineLength : longLineLength;
             int yIndex = 72 - i;
-            drawAHRSLine(canvas, length, yIndex * pitchInterval, Integer.toString(i * 10));
+            drawAHRSLine(canvas, length, yIndex * pitchInterval, Integer.toString(i * 10), flipped);
         }
         return bitmap;
     }
 
-    private void drawAHRSLine(Canvas canvas, float length, float positionY, String pitchText) {
+    private void drawAHRSLine(Canvas canvas, float length, float positionY, String pitchText, boolean flipped) {
         float textLength = textPaint.measureText(pitchText);
         int size = canvas.getWidth();
+        if (flipped) {
+            canvas.save();
+            canvas.rotate(180, size / 2 - length - textLength / 2 - 5, positionY);
+        }
         canvas.drawText(pitchText, size / 2 - length - textLength - 5, positionY + 10, textPaint);
+        if (flipped) {
+            canvas.restore();
+        }
+        if (flipped) {
+            canvas.save();
+            canvas.rotate(180, size / 2 + length + 5 + textLength / 2, positionY);
+        }
         canvas.drawText(pitchText, size / 2 + length + 5, positionY + 10, textPaint);
+        if (flipped) {
+            canvas.restore();
+        }
         canvas.drawLine(size / 2 - length, positionY, size / 2 + length, positionY, ahrsLine);
     }
 

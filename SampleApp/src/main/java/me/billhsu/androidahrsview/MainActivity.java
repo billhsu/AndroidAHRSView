@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
                             ahrsView.setPitch(sum);
                         }
                     });
-                    sum += 0.3;
+                    sum += 1.0f;
                     try {
-                        sleep(50);
+                        sleep(100);
                     } catch (InterruptedException exp) {
                         exp.printStackTrace();
                     }
