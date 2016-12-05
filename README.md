@@ -5,15 +5,12 @@ Attitude Heading Reference System(AHRS) display module for Android.
 
 <img src="doc/androidAHRS.png" alt="screenshot" width="200" height="200"/>
 
-## Demo gif
-![gif](doc/demo.gif)
-
 ## How to use it
 
-**1. Add gradle dependency**  
+### 1. Add gradle dependency
 // TODO add this
 
-**2. Add to the layout xml.**
+### 2. Add to the layout xml
 
 ```xml
 <me.billhsu.ahrsview.AHRSView
@@ -22,13 +19,16 @@ Attitude Heading Reference System(AHRS) display module for Android.
         android:layout_height="300dp"/>
 ```
 
-**3. Use it in your code!**
+### 3. Use it in your code!
 ```java
 AHRSView ahrsView = (AHRSView) findViewById(R.id.AHRSView);
 ahrsView.setRoll(roll);
 ahrsView.setPitch(pitch);
 ahrsView.setYaw(yaw);
 ```
+
+#### Demo gif
+![gif](doc/demo.gif)
 
 For more details please check the [SampleApp](https://github.com/billhsu/AndroidAHRSView/blob/master/SampleApp/) project.  
 
