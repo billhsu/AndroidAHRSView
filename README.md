@@ -1,7 +1,7 @@
-AndroidAHRSView
+AndroidAHRSView [![](https://www.jitpack.io/v/billhsu/AndroidAHRSView.svg)](https://www.jitpack.io/#billhsu/AndroidAHRSView)
 ================
 
-Attitude Heading Reference System(AHRS) display module for Android.
+Attitude Heading Reference System(AHRS) display module for Android. 
 
 <img src="https://raw.githubusercontent.com/billhsu/AndroidAHRSView/master/doc/androidAHRS.png" alt="screenshot" width="200" height="200"/>
 
