@@ -24,7 +24,7 @@ Attitude Heading Reference System(AHRS) display module for Android.
 
 ```
   dependencies {
-          compile 'com.github.billhsu:AndroidAHRSView:0.1.0'
+          compile 'com.github.billhsu:AndroidAHRSView:1.0.0'
   }
 ```
 
