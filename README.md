@@ -3,7 +3,7 @@ AndroidAHRSView
 
 Attitude Heading Reference System(AHRS) display module for Android.
 
-<img src="doc/androidAHRS.png" alt="screenshot" width="200" height="200"/>
+<img src="https://raw.githubusercontent.com/billhsu/AndroidAHRSView/master/doc/androidAHRS.png" alt="screenshot" width="200" height="200"/>
 
 ## How to use it
 
@@ -28,7 +28,7 @@ ahrsView.setYaw(yaw);
 ```
 
 #### Demo gif
-![gif](doc/demo.gif)
+![gif](https://raw.githubusercontent.com/billhsu/AndroidAHRSView/master/doc/demo.gif)
 
 For more details please check the [SampleApp](https://github.com/billhsu/AndroidAHRSView/blob/master/SampleApp/) project.  
 
