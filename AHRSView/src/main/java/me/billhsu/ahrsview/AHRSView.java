@@ -9,7 +9,7 @@ import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.lang.ref.WeakReference;
+import java.lang.ref.SoftReference;
 
 /**
  * AHRS view for Android.
@@ -25,8 +25,8 @@ public class AHRSView extends View {
     private Paint groundPaint;
     private Paint skyPaint;
     private Paint textPaint;
-    private WeakReference<Bitmap> ahrsBitmapRef = new WeakReference<>(null);
-    private WeakReference<Bitmap> ahrsFlippedBitmapRef = new WeakReference<>(null);
+    private SoftReference<Bitmap> ahrsBitmapRef = new SoftReference<>(null);
+    private SoftReference<Bitmap> ahrsFlippedBitmapRef = new SoftReference<>(null);
 
     private int width;
     private int height;
@@ -106,13 +106,13 @@ public class AHRSView extends View {
         if (ahrsBitmap != null) {
             ahrsBitmap.recycle();
         }
-        ahrsBitmapRef = new WeakReference<>(drawAHRSBitmap(false));
+        ahrsBitmapRef = new SoftReference<>(drawAHRSBitmap(false));
 
         Bitmap ahrsFlippedBitmap = ahrsFlippedBitmapRef.get();
         if (ahrsFlippedBitmap != null) {
             ahrsFlippedBitmap.recycle();
         }
-        ahrsFlippedBitmapRef = new WeakReference<>(drawAHRSBitmap(true));
+        ahrsFlippedBitmapRef = new SoftReference<>(drawAHRSBitmap(true));
     }
 
     private Bitmap getAHRSBitmap() {
@@ -120,14 +120,14 @@ public class AHRSView extends View {
             Bitmap ahrsFlippedBitmap = ahrsFlippedBitmapRef.get();
             if (ahrsFlippedBitmap == null) {
                 ahrsFlippedBitmap = drawAHRSBitmap(true);
-                ahrsFlippedBitmapRef = new WeakReference<>(ahrsFlippedBitmap);
+                ahrsFlippedBitmapRef = new SoftReference<>(ahrsFlippedBitmap);
             }
             return ahrsFlippedBitmap;
         } else {
             Bitmap ahrsBitmap = ahrsBitmapRef.get();
             if (ahrsBitmap == null) {
                 ahrsBitmap = drawAHRSBitmap(false);
-                ahrsBitmapRef = new WeakReference<>(ahrsBitmap);
+                ahrsBitmapRef = new SoftReference<>(ahrsBitmap);
             }
             return ahrsBitmap;
         }

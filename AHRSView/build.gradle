@@ -1,26 +1,5 @@
 apply plugin: 'com.android.library'
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'AHRSView'
-
-    publishedGroupId = 'me.billhsu.ahrsview'
-    libraryName = 'AHRSView'
-    artifact = 'ahrsview'
-
-    libraryDescription = 'Attitude Heading Reference System(AHRS) display module for Android'
-
-    siteUrl = 'https://github.com/billhsu/AndroidAHRSView'
-    gitUrl = 'git@github.com:billhsu/AndroidAHRSView.git'
-
-    libraryVersion = '0.1.0'
-
-    developerId = 'billhsu'
-    developerName = 'Shipeng Xu'
-    developerEmail = 'billhsu.x@gmail.com'
-
-    licenseName = 'MIT'
-}
 
 android {
     compileSdkVersion 23
