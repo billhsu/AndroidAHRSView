@@ -7,9 +7,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
-
-import java.lang.ref.SoftReference;
 
 /**
  * AHRS view for Android.
@@ -18,15 +17,15 @@ import java.lang.ref.SoftReference;
  * Author: Shipeng Xu
  */
 public class AHRSView extends View {
-    private float roll = 190.0f, pitch = 0.0f, yaw = 0.0f;
-
+    private float roll = 0.0f, pitch = 0.0f, yaw = 0.0f;
+    private static final String TAG = AHRSView.class.getSimpleName();
     private Paint horizontalLine;
     private Paint ahrsLine;
     private Paint groundPaint;
     private Paint skyPaint;
     private Paint textPaint;
-    private SoftReference<Bitmap> ahrsBitmapRef = new SoftReference<>(null);
-    private SoftReference<Bitmap> ahrsFlippedBitmapRef = new SoftReference<>(null);
+    private Bitmap ahrsBitmap = null;
+    private Bitmap ahrsFlippedBitmap = null;
 
     private int width;
     private int height;
@@ -102,32 +101,30 @@ public class AHRSView extends View {
     }
 
     private void updateAHRSBitmap() {
-        Bitmap ahrsBitmap = ahrsBitmapRef.get();
+        Log.d(TAG, "updateAHRSBitmap");
         if (ahrsBitmap != null) {
             ahrsBitmap.recycle();
+            ahrsBitmap = null;
         }
-        ahrsBitmapRef = new SoftReference<>(drawAHRSBitmap(false));
-
-        Bitmap ahrsFlippedBitmap = ahrsFlippedBitmapRef.get();
+        ahrsBitmap = drawAHRSBitmap(false);
         if (ahrsFlippedBitmap != null) {
             ahrsFlippedBitmap.recycle();
+            ahrsFlippedBitmap = null;
         }
-        ahrsFlippedBitmapRef = new SoftReference<>(drawAHRSBitmap(true));
+        ahrsFlippedBitmap = drawAHRSBitmap(true);
     }
 
     private Bitmap getAHRSBitmap() {
-        if (Math.abs(roll % 360 - 180) <= 90) {
-            Bitmap ahrsFlippedBitmap = ahrsFlippedBitmapRef.get();
+        if (Math.abs((roll % 360 < 0 ? (roll % 360 + 360) : (roll % 360)) - 180) <= 90) {
             if (ahrsFlippedBitmap == null) {
+                Log.d(TAG, "update ahrsFlippedBitmap");
                 ahrsFlippedBitmap = drawAHRSBitmap(true);
-                ahrsFlippedBitmapRef = new SoftReference<>(ahrsFlippedBitmap);
             }
             return ahrsFlippedBitmap;
         } else {
-            Bitmap ahrsBitmap = ahrsBitmapRef.get();
             if (ahrsBitmap == null) {
+                Log.d(TAG, "update ahrsBitmap");
                 ahrsBitmap = drawAHRSBitmap(false);
-                ahrsBitmapRef = new SoftReference<>(ahrsBitmap);
             }
             return ahrsBitmap;
         }
@@ -135,7 +132,7 @@ public class AHRSView extends View {
 
     private Bitmap drawAHRSBitmap(boolean flipped) {
         int size = Math.max(width, height) * 2;
-        Bitmap bitmap = Bitmap.createBitmap(size, size * 2, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(size, size * 2, Bitmap.Config.RGB_565);
         Canvas canvas = new Canvas(bitmap);
 
         float shortLineLength = size * 0.05f;

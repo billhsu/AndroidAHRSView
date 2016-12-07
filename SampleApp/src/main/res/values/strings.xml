@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidAHRSView</string>
+    <string name="roll">Roll</string>
+    <string name="pitch">Pitch</string>
 </resources>
