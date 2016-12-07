@@ -1,71 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout android:id="@+id/activity_main"
-                                             xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:paddingBottom="@dimen/activity_vertical_margin"
-                                             android:paddingLeft="@dimen/activity_horizontal_margin"
-                                             android:paddingRight="@dimen/activity_horizontal_margin"
-                                             android:paddingTop="@dimen/activity_vertical_margin"
-                                             tools:context="me.billhsu.androidahrsview.MainActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="me.billhsu.androidahrsview.MainActivity">
 
     <me.billhsu.ahrsview.AHRSView
         android:id="@+id/AHRSView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:id="@+id/rollText"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/roll"
-        app:layout_constraintLeft_toLeftOf="@+id/AHRSView"
-        app:layout_constraintTop_toBottomOf="@+id/AHRSView"
-        />
+        android:layout_alignLeft="@+id/AHRSView"
+        android:layout_alignStart="@+id/AHRSView"
+        android:layout_below="@+id/AHRSView"
+        android:layout_marginTop="30dp"
+        android:text="@string/roll" />
 
     <SeekBar
         android:id="@+id/seekBarRoll"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rollText"
+        android:layout_alignEnd="@+id/AHRSView"
+        android:layout_alignRight="@+id/AHRSView"
+        android:layout_toEndOf="@+id/rollText"
+        android:layout_toRightOf="@+id/rollText"
         android:max="360"
-        android:progress="180"
-        app:layout_constraintBottom_toBottomOf="@+id/rollText"
-        app:layout_constraintLeft_toRightOf="@+id/rollText"
-        app:layout_constraintRight_toRightOf="@+id/AHRSView"
-        />
+        android:progress="180" />
 
     <TextView
         android:id="@+id/pitchText"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/pitch"
-        app:layout_constraintLeft_toLeftOf="@+id/AHRSView"
-        app:layout_constraintTop_toBottomOf="@+id/rollText"
-        />
+        android:layout_alignLeft="@+id/AHRSView"
+        android:layout_alignStart="@+id/AHRSView"
+        android:layout_below="@+id/rollText"
+        android:layout_marginTop="30dp"
+        android:text="@string/pitch" />
 
     <SeekBar
         android:id="@+id/seekBarPitch"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/pitchText"
+        android:layout_alignEnd="@+id/AHRSView"
+        android:layout_alignRight="@+id/AHRSView"
+        android:layout_toEndOf="@+id/pitchText"
+        android:layout_toRightOf="@+id/pitchText"
         android:max="360"
-        android:progress="180"
-        app:layout_constraintBottom_toBottomOf="@+id/pitchText"
-        app:layout_constraintLeft_toRightOf="@+id/pitchText"
-        app:layout_constraintRight_toRightOf="@+id/AHRSView"
-        />
+        android:progress="180" />
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

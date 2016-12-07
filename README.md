@@ -24,7 +24,7 @@ Attitude Heading Reference System(AHRS) display module for Android.
 
 ```
   dependencies {
-          compile 'com.github.billhsu:AndroidAHRSView:1.0.0'
+          compile 'com.github.billhsu:AndroidAHRSView:1.0.1'
   }
 ```
 
@@ -47,7 +47,8 @@ ahrsView.setYaw(yaw);
 ```
 
 #### Demo gif
-![gif](https://raw.githubusercontent.com/billhsu/AndroidAHRSView/master/doc/demo.gif)
+![gif1](https://raw.githubusercontent.com/billhsu/AndroidAHRSView/master/doc/demo1.gif)
+![gif2](https://raw.githubusercontent.com/billhsu/AndroidAHRSView/master/doc/demo2.gif)
 
 For more details please check the [SampleApp](https://github.com/billhsu/AndroidAHRSView/blob/master/SampleApp/) project.  
 
