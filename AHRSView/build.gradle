@@ -1,5 +1,19 @@
-apply plugin: 'com.android.library'
+plugins {
+    id "com.jfrog.bintray" version "1.4"
+}
 
+ext {
+    groupName = 'me.billhsu.ahrsview'
+    libName = 'AHRSView'
+    libVersion = '1.0.3'
+    libDesc = 'Attitude Heading Reference System(AHRS) display module for Android.'
+}
+
+group = groupName
+version = libVersion
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 23
@@ -29,4 +43,57 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:23.4.0'
     testCompile 'junit:junit:4.12'
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name libName
+            description libDesc
+            url 'https://github.com/billhsu/AndroidAHRSView'
+            inceptionYear '2016'
+
+            packaging 'aar'
+            groupId groupName
+            artifactId libName
+            version libVersion
+
+            licenses {
+                license {
+                    name 'MIT'
+                    url 'https://github.com/billhsu/AndroidAHRSView/blob/master/LICENSE'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection 'git@github.com:billhsu/AndroidAHRSView.git'
+                url 'https://github.com/billhsu/AndroidAHRSView'
+
+            }
+            developers {
+                developer {
+                    name 'Shipeng Xu'
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = libName
+        userOrg = 'shipeng'
+        licenses = ['MIT']
+        vcsUrl = 'git@github.com:billhsu/AndroidAHRSView.git'
+        version {
+            name = libVersion
+            desc = libDesc
+            vcsTag = libVersion
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+        }
+    }
 }

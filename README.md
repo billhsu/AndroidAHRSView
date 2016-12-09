@@ -1,4 +1,4 @@
-AndroidAHRSView [![](https://www.jitpack.io/v/billhsu/AndroidAHRSView.svg)](https://www.jitpack.io/#billhsu/AndroidAHRSView)
+AndroidAHRSView
 ================
 
 Attitude Heading Reference System(AHRS) display module for Android. 
@@ -9,28 +9,15 @@ Attitude Heading Reference System(AHRS) display module for Android.
 
 ### Add gradle dependency
 
-#### Step 1. Add it in your root build.gradle at the end of repositories
-
-```
-  allprojects {
-    repositories {
-      ...
-      maven { url 'https://www.jitpack.io' }
-    }
-  }
-```
-
-#### Step 2. Add the dependency
-
 ```
   dependencies {
-          compile 'com.github.billhsu:AndroidAHRSView:1.0.2'
+          compile 'me.billhsu.ahrsview:AHRSView:1.0.3'
   }
 ```
 
 ### Add to the layout xml
 
-```xml
+```
 <me.billhsu.ahrsview.AHRSView
         android:id="@+id/AHRSView"
         android:layout_width="300dp"
