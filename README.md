@@ -39,7 +39,7 @@ ahrsView.setYaw(yaw);
 
 For more details please check the [SampleApp](https://github.com/billhsu/AndroidAHRSView/blob/master/SampleApp/) project.  
 
-##Author
+## Author
 **Shipeng Xu**
 
 + http://BillHsu.me
